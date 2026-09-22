@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="starRoboHarness is an auditable control layer that connects multimodal reasoners to robot policies." />
+    <meta name="theme-color" content="#ffffff" />
+    <title>starRoboHarness · Auditable reasoning for robot policies</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="assets/evaluation/manifest.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="topbar">
+      <a class="wordmark" href="#top" aria-label="starRoboHarness home">
+        <span class="wordmark-mark"><img src="assets/logo.png" alt="" /></span>
+        <span>starRoboHarness</span>
+      </a>
+      <nav class="topbar-nav" aria-label="Primary navigation">
+        <a href="#abstract">Abstract</a>
+        <a href="#introduction">Introduction</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="assets/tech-report.pdf">Tech report</a>
+        <a href="zh/" class="language-link">Chinese</a>
+        <a class="repo-link" href="https://github.com/JackAILab/starRoboHarness" target="_blank" rel="noopener noreferrer" aria-label="View the starRoboHarness repository on GitHub">Github <span aria-hidden="true">↗</span></a>
+      </nav>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+    </header>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="#abstract">Abstract</a><a href="#introduction">Introduction</a><a href="#method">Method</a><a href="#results">Results</a><a href="zh/">中文</a>
+    </nav>
+    <aside class="reader-rail" aria-label="Reading progress">
+      <div class="rail-top"><span class="rail-label">READING SESSION</span><span id="reading-percent">0%</span></div>
+      <div class="rail-track"><i id="reading-progress"></i></div>
+      <div class="rail-session-card"><span class="rail-card-kicker">CURRENT SESSION</span><strong id="rail-session">Abstract</strong><span id="rail-detail">01 / 09 sections</span></div><button class="rail-toggle" aria-expanded="true" aria-controls="reader-sections">Contents <span aria-hidden="true">⌄</span></button><nav id="reader-sections" aria-label="On this page"><a href="#abstract">Abstract</a><a href="#introduction">Introduction</a><a href="#method">Method</a><a href="#architecture">Architecture</a><a href="#results">Results</a><a href="#replays">Video replays</a><a href="#evaluation">Evaluation</a><a href="#limitations">Limitations</a><a href="#roadmap">Roadmap</a></nav>
+    </aside>
+
+    <main id="main">
+      <article class="report" id="top">
+        <header class="hero">
+          <div class="hero-background" aria-hidden="true">
+            <div class="hero-strip">
+              <div class="hero-strip-track">
+                <div class="hero-strip-set">
+                  <img src="assets/hero/arrange-l0-early.png" alt="" />
+                  <img src="assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="assets/hero/arrange-l1-mid.png" alt="" />
+                  <img src="assets/hero/classify-l1-final.png" alt="" />
+                  <img src="assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="assets/hero/classify-l1-mid.png" alt="" />
+                </div>
+                <div class="hero-strip-set">
+                  <img src="assets/hero/arrange-l0-early.png" alt="" />
+                  <img src="assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="assets/hero/arrange-l1-mid.png" alt="" />
+                  <img src="assets/hero/classify-l1-final.png" alt="" />
+                  <img src="assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="assets/hero/classify-l1-mid.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="hero-strip">
+              <div class="hero-strip-track">
+                <div class="hero-strip-set">
+                  <img src="assets/hero/sorting-mid.png" alt="" />
+                  <img src="assets/hero/organize-l0-mid.png" alt="" />
+                  <img src="assets/hero/sorting-left-wrist.png" alt="" />
+                  <img src="assets/hero/organize-l1-mid.png" alt="" />
+                  <img src="assets/hero/sorting-final.png" alt="" />
+                  <img src="assets/hero/organize-l0-final.png" alt="" />
+                </div>
+                <div class="hero-strip-set">
+                  <img src="assets/hero/sorting-mid.png" alt="" />
+                  <img src="assets/hero/organize-l0-mid.png" alt="" />
+                  <img src="assets/hero/sorting-left-wrist.png" alt="" />
+                  <img src="assets/hero/organize-l1-mid.png" alt="" />
+                  <img src="assets/hero/sorting-final.png" alt="" />
+                  <img src="assets/hero/organize-l0-final.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="hero-strip">
+              <div class="hero-strip-track">
+                <div class="hero-strip-set">
+                  <img src="assets/hero/classify-l1-mid.png" alt="" />
+                  <img src="assets/hero/sorting-final.png" alt="" />
+                  <img src="assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="assets/hero/organize-l0-final.png" alt="" />
+                  <img src="assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="assets/hero/sorting-mid.png" alt="" />
+                </div>
+                <div class="hero-strip-set">
+                  <img src="assets/hero/classify-l1-mid.png" alt="" />
+                  <img src="assets/hero/sorting-final.png" alt="" />
+                  <img src="assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="assets/hero/organize-l0-final.png" alt="" />
+                  <img src="assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="assets/hero/sorting-mid.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-content page-column">
+            <h1><span>starRoboHarness</span></h1>
+            <div class="authors" aria-label="Authors">
+              <span class="author-line"><span>Jiehui Huang</span><span>Haowen Yan</span><span>Yuxin Chen</span><span>Zixuan Wang</span><span>Senqiao Yang</span></span>
+              <span class="author-line"><span>Pengguang Chen</span><span>Jinhui Ye</span><span>Shu Liu</span><span>Jiaya Jia</span></span>
+            </div>
+            <p class="dek">An Open Execution Harness for Reasoning-Driven Robotics.</p><span class="status-pill"><i></i>Ongoing development</span>
+            <div class="hero-actions"><a class="button primary" href="#results">Explore paired results</a><a class="button secondary" href="assets/tech-report.pdf">Technical report (PDF)</a><a class="button secondary" href="zh/">中文</a></div>
+          </div>
+        </header>
+
+        <nav class="section-nav page-column" aria-label="Report sections">
+          <a href="#abstract">Abstract</a><a href="#introduction">Introduction</a><a href="#method">Method</a><a href="#results">Results</a><a href="#evaluation">Evaluation protocol</a><a href="#limitations">Limitations</a><a href="#roadmap">Roadmap</a>
+        </nav>
+        <div class="quick-links page-column" aria-label="Project links"><a href="#results">Paired results</a><a href="#evaluation">Evaluation protocol</a><a href="#replay-heading">Video replays</a><a href="assets/tech-report.pdf">Download technical report ↗</a></div>
+
+        <section class="section page-column" id="abstract">
+          <div class="section-kicker">01 · Abstract</div>
+          <h2>An auditable boundary between reasoning and robot action</h2>
+          <p class="lead">starRoboHarness binds policy proposals to exact observations, checks reasoner decisions before execution, and records actual action acknowledgements and native terminal outcomes. Policy, reasoner, and environment implementations connect through adapters.</p>
+          <p>We reconstruct two historical RoboDojo panels, each with five tasks and five exact policy–hybrid case pairs per task. The original panel records <strong>6/25 hybrid successes versus 1/25 policy successes</strong>; the added panel records <strong>11/25 versus 8/25</strong>. Packing regresses in partial score, while reasoning usage is substantial. These historical comparisons describe outcomes under different execution cadences; they do not isolate the causal effect of corrections.</p>
+          <p class="keywords"><b>Keywords:</b> robot policy · multimodal reasoner · hybrid control · native evaluation · execution trace</p>
+        </section>
+
+        <figure class="system-architecture-figure wide-inner">
+          <img src="assets/framework.png" alt="Project framework showing task and world-state inputs, reasoner and policy control modes, execution adapters, and audit. Dashed components are ongoing research." />
+          <figcaption>Project framework from the technical report. The reported experiments exercise QwenPI_v3, GPT-6 Astra, and RoboDojo. Dashed components represent ongoing research. <a href="assets/framework.pdf">Open full-resolution PDF ↗</a></figcaption>
+        </figure>
+
+        <section class="section page-column" id="introduction">
+          <div class="section-kicker">02 · Introduction</div>
+          <h2>Use strong reasoning where it matters most</h2>
+          <p class="lead">Robot policies produce fast, continuous action sequences, while multimodal reasoners can inspect visible failures, challenge a policy's next intent, and plan short recoveries. The central question is how to combine those strengths without turning uncertainty into uncontrolled intervention.</p>
+          <p>starRoboHarness treats the learned policy as the default controller. A reasoner observes the same public evidence, reviews the previous execution and the next proposal, and receives authority only through explicit gates. The design keeps benchmark instructions and native outcomes intact while making policy families, reasoners, robots, and simulators replaceable behind adapters.</p>
+          <div class="principles-grid">
+            <article><span>01</span><h3>Protocol first</h3><p>Protocols stay stable while policies, reasoners, robots, and benchmarks remain replaceable.</p></article>
+            <article><span>02</span><h3>Evidence gated</h3><p>Uncertainty alone never authorizes takeover. Every correction must cite observable evidence.</p></article>
+            <article><span>03</span><h3>Bounded control</h3><p>A student prefix uses at most 15 steps; a local correction uses at most five before observing again.</p></article>
+            <article><span>04</span><h3>Trace everything</h3><p>Proposals, decisions, actual acknowledgements, native outcomes, versions, cost, and latency are recorded.</p></article>
+          </div>
+        </section>
+
+        <section class="section page-column" id="method">
+          <div class="section-kicker">03 · Method</div>
+          <h2>The policy executes fluently; the reasoner intervenes selectively</h2>
+          <p>Every control cycle starts from the benchmark's original instruction and an exact observation. StarVLA/QwenPI_v3 proposes an action chunk. The reasoner separately assesses the previous execution and the visible intent of the next proposal, then either passes the policy proposal or requests a bounded end-effector correction.</p>
+          <div class="protocol" aria-label="starRoboHarness control flow">
+            <div class="protocol-node input-node"><span>INPUT</span><strong>Task + observation</strong><small>3 RGB views · 14D state · instruction</small></div>
+            <div class="protocol-arrow" aria-hidden="true">→</div>
+            <div class="protocol-node"><span>POLICY</span><strong>StarVLA proposal</strong><small>QwenPI_v3 · 50 × 14 actions</small></div>
+            <div class="protocol-arrow" aria-hidden="true">→</div>
+            <div class="protocol-node accent-node"><span>REVIEW</span><strong>Evidence gate</strong><small>Outcome · intent · safety · freshness</small></div>
+            <div class="protocol-branch" aria-hidden="true"><i></i><b>OR</b><i></i></div>
+            <div class="protocol-outcomes">
+              <div class="protocol-node"><span>PASS</span><strong>Execute proposal</strong><small>1–15 student steps</small></div>
+              <div class="protocol-node teal-node"><span>CORRECT</span><strong>Bounded EEF fix</strong><small>1–5 reasoner steps</small></div>
+            </div>
+            <div class="protocol-return"><span aria-hidden="true">↺</span> Return to a fresh observation boundary</div>
+          </div>
+          <div class="spec-row" aria-label="Correction limits">
+            <div><strong>≤ 15</strong><span>student steps</span></div><div><strong>≤ 5</strong><span>correction steps</span></div><div><strong>5 cm</strong><span>translation per arm</span></div><div><strong>0.35 rad</strong><span>rotation per arm</span></div>
+          </div>
+          <p>The QwenPI_v3 policy contract uses three ordered RGB views, the raw 14D dual-ARX-X5 joint state, and continuous gripper opening with <code>0 = closed</code> and <code>1 = open</code>. QwenPI_v3 predicts 50 absolute joint-position actions; the historical hybrid executes at most 15 policy actions before replanning. Pure-policy baselines execute 16 actions per replan. This cadence difference is part of the comparison.</p>
+        </section>
+
+        <section class="wide-section architecture-section" id="architecture">
+          <div class="wide-inner">
+            <div class="section-kicker">03.2 · System architecture</div>
+            <div class="section-heading-row"><h2>Replace adapters, not the control system</h2><p>StarVLA, OpenPI, RoboDojo, Isaac Sim, and provider SDKs remain outside the lightweight core package.</p></div>
+            <div class="architecture-map">
+              <div class="arch-lane"><span>PROPOSAL</span><strong>PolicyAdapter</strong><small>Binds a bounded, executable proposal to one exact observation and action contract.</small></div>
+              <div class="arch-connector"><span>proposal</span></div>
+              <div class="arch-lane focus"><span>AUTHORITY</span><strong>Evidence Gate + SafetyGuard</strong><small>Checks request identity, freshness, evidence, geometry, units, action bounds, and takeover scope.</small></div>
+              <div class="arch-connector"><span>decision</span></div>
+              <div class="arch-lane"><span>EXECUTION</span><strong>EnvironmentAdapter</strong><small>The only component allowed to change environment state; returns actual acknowledgements and native termination.</small></div>
+            </div>
+            <div class="adapter-strip"><span>Observation + ContextCompiler</span><span>ReasonerAdapter</span><span>EnvironmentAdapter</span><span>SHA-chained JSONL trace</span></div>
+          </div>
+        </section>
+
+        <section class="section wide-inner results-section" id="results">
+          <div class="results-intro">
+            <div class="section-kicker">04 · Historical paired results · September 2026</div>
+            <h2>Two five-task panels, 50 exact case pairs</h2>
+            <p class="lead">Each panel compares QwenPI_v3 policy execution with GPT-6 Astra supervising QwenPI_v3 proposals. The original and added panels were collected in different periods, so their aggregates stay separate. Native simulator receipts determine success and score.</p>
+          </div>
+          <div class="result-summary" aria-label="Paired panel headline results">
+            <article><span>ORIGINAL PANEL</span><strong>6/25</strong><p>Hybrid successes · policy 1/25</p></article>
+            <article><span>ADDED PANEL</span><strong>11/25</strong><p>Hybrid successes · policy 8/25</p></article>
+            <article><span>ORIGINAL MEAN SCORE</span><strong>43.6</strong><p>Hybrid · policy 9.0</p></article>
+            <article><span>ADDED MEAN SCORE</span><strong>50.4</strong><p>Hybrid · policy 38.4</p></article>
+          </div>
+          <div class="disclosure"><span>Reading the comparison</span>These are five exact case pairs per task, matched by task, variant, layout, seed, and case identity. Pure policy executes 16 actions per replan; the hybrid accepts shorter prefixes or bounded corrections. Collection periods and infrastructure also differ. The observed gap is not a correction-only causal effect.</div>
+          <figure class="report-figure">
+            <img src="assets/task-score-comparison.svg" alt="Mean native score for policy and hybrid on ten tasks. Eight tasks increase, one ties, and packing decreases under hybrid control." loading="lazy" />
+            <figcaption>Mean native score and success counts by task. Original and added panels are separated by the vertical divider. <a href="assets/task-score-comparison.svg">Open vector figure ↗</a></figcaption>
+          </figure>
+          <div class="result-table-heading"><div><span>TABLE 1</span><h3>Original five-task panel</h3></div><p>Five exact case pairs per task. Score is the mean native partial score on a 0–100 scale.</p></div>
+          <div class="benchmark-table-wrap" tabindex="0" aria-label="Original five-task panel comparison table">
+            <table class="benchmark-table paired-table">
+              <caption>Original five-task panel: policy and hybrid native success and mean score</caption>
+              <thead><tr><th scope="col">Task</th><th scope="col">Policy success</th><th scope="col" class="primary-result">Hybrid success</th><th scope="col">Policy score</th><th scope="col" class="primary-result">Hybrid score</th></tr></thead>
+              <tbody><tr><th scope="row">Organize table</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>10</td><td class="primary-result"><strong>65</strong></td></tr>
+<tr><th scope="row">Classify by language</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>0</td><td class="primary-result"><strong>0</strong></td></tr>
+<tr><th scope="row">Imitate sorting</th><td>0/5</td><td class="primary-result"><strong>1/5</strong></td><td>1</td><td class="primary-result"><strong>36</strong></td></tr>
+<tr><th scope="row">Arrange largest number</th><td>0/5</td><td class="primary-result"><strong>1/5</strong></td><td>2</td><td class="primary-result"><strong>37</strong></td></tr>
+<tr><th scope="row">Fold clothes</th><td>1/5</td><td class="primary-result"><strong>4/5</strong></td><td>32</td><td class="primary-result"><strong>80</strong></td></tr>
+<tr class="overall-row"><th scope="row">Panel total</th><td>1/25</td><td class="primary-result"><strong>6/25</strong></td><td>9</td><td class="primary-result"><strong>43.6</strong></td></tr></tbody>
+            </table>
+          </div>
+          <div class="result-table-heading"><div><span>TABLE 2</span><h3>Added five-task panel</h3></div><p>Five exact case pairs per task. Score is the mean native partial score on a 0–100 scale.</p></div>
+          <div class="benchmark-table-wrap" tabindex="0" aria-label="Added five-task panel comparison table">
+            <table class="benchmark-table paired-table">
+              <caption>Added five-task panel: policy and hybrid native success and mean score</caption>
+              <thead><tr><th scope="col">Task</th><th scope="col">Policy success</th><th scope="col" class="primary-result">Hybrid success</th><th scope="col">Policy score</th><th scope="col" class="primary-result">Hybrid score</th></tr></thead>
+              <tbody><tr><th scope="row">Put bottles in bin</th><td>3/5</td><td class="primary-result"><strong>4/5</strong></td><td>64</td><td class="primary-result"><strong>82</strong></td></tr>
+<tr><th scope="row">Classify objects</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>6</td><td class="primary-result"><strong>22</strong></td></tr>
+<tr><th scope="row">Build tower</th><td>4/5</td><td class="primary-result"><strong>4/5</strong></td><td>82</td><td class="primary-result"><strong>86</strong></td></tr>
+<tr><th scope="row">Make Kong</th><td>1/5</td><td class="primary-result"><strong>3/5</strong></td><td>20</td><td class="primary-result"><strong>60</strong></td></tr>
+<tr><th scope="row">Pack objects in box</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>20</td><td class="primary-result"><strong>2</strong></td></tr>
+<tr class="overall-row"><th scope="row">Panel total</th><td>8/25</td><td class="primary-result"><strong>11/25</strong></td><td>38.4</td><td class="primary-result"><strong>50.4</strong></td></tr></tbody>
+            </table>
+          </div>
+          <p class="results-note">Valid native timeouts remain scored failures. Provider and infrastructure failures are kept in a separate attempt ledger. The 18 excluded pre-control attempts in the added-policy collection do not enter either denominator. <a href="assets/case-records.csv">Download sanitized case rows</a> · <a href="assets/results-summary.json">Download computed summary</a>.</p>
+          <div class="result-table-heading"><div><span>WHAT THE PAIRS SHOW</span><h3>Task-level findings</h3></div></div>
+          <div class="insight-grid">
+            <article><span>01 · COMPLETIONS</span><h4>Fold clothes and Make Kong drive gains</h4><p>Fold clothes rises from 1/5 to 4/5 successes in the original panel. Make Kong rises from 1/5 to 3/5 in the added panel.</p></article>
+            <article><span>02 · PARTIAL CREDIT</span><h4>More score can still mean zero success</h4><p>Added-panel classification rises from mean score 6 to 22, while both methods remain at 0/5 completions.</p></article>
+            <article><span>03 · REGRESSION</span><h4>Packing needs a trajectory study</h4><p>Both methods fail all five packing cases, and hybrid mean score falls from 20 to 2. All five hybrid episodes reach the native 1,300-step limit.</p></article>
+            <article><span>04 · ATTRIBUTION</span><h4>Successful runs can use zero corrections</h4><p>The archived build-tower success and two later successful development cases record zero correction steps. Approval and intervention must be studied separately.</p></article>
+          </div>
+          <div class="cost-panel">
+            <div><span>REASONING COST · ADDED 25-CASE PANEL</span><h3>Quality and usage belong on the same page</h3><p>The hybrid records 4,627 correction steps, 462.5 million reported input tokens, and 1.56 million output tokens. About 93.95% of input tokens are recorded as cached. These are asynchronous usage snapshots, not final billing.</p></div>
+            <div class="cost-numbers"><strong>4,627<small>correction steps</small></strong><strong>462.5M<small>reported input tokens</small></strong></div>
+          </div>
+          <p class="results-note">Mean control-loop wall time was 330.5 s for policy and 4,999.8 s for hybrid in the added panel. Hardware, transport, and collection period were different, so this is operational telemetry rather than a controlled speed ratio. The combined hybrid index is 17/50 successes and score 47.0; it is a descriptive union of two historical blocks.</p>
+          <section id="replays" class="evaluation-replays" aria-labelledby="replay-heading">
+            <div class="replay-heading"><div><span class="section-kicker">Archived five-task media</span><h3 id="replay-heading">Selected episode replays</h3></div><span class="replay-source">Historical clips, separate from the paired tables above</span></div>
+            <p class="replay-intro">These selected clips come from an earlier five-task website release. They illustrate execution paths but are not the case-level evidence for the 50 pairs summarized above. Choose a policy or hybrid replay for each task.</p>
+            <div id="replay-list" class="replay-list" aria-live="polite"></div>
+            <noscript><p class="replay-notice">Enable JavaScript to select a control mode and play the evaluation replays.</p></noscript>
+          </section>
+        </section>
+
+        <section class="section page-column" id="evaluation">
+          <div class="section-kicker">05 · Evaluation protocol</div>
+          <h2>Report quality, validity, and cost together</h2>
+          <p class="lead">A valid comparison aligns task, layout, seed, instruction, action contract, and native termination. Success and score remain environment outcomes rather than model self-reports.</p>
+          <div class="metric-switch" role="group" aria-label="Evaluation metric category"><button type="button" aria-pressed="true" data-metric="quality">Quality metrics</button><button type="button" aria-pressed="false" data-metric="efficiency">Efficiency metrics</button></div>
+          <div class="metric-panel" data-panel="quality">
+            <div class="metric-card"><span>PRIMARY</span><strong>Native success + score</strong><p>Use the environment's terminal receipt, never the model's own claim of success.</p></div>
+            <div class="metric-card"><span>PAIRED</span><strong>Win / tie / loss</strong><p>Compare methods case by case with task, layout, seed, and termination aligned.</p></div>
+            <div class="metric-card"><span>SAFETY</span><strong>False takeover</strong><p>Measure interventions made without sufficient evidence of failure or misalignment.</p></div>
+            <div class="metric-card"><span>RECOVERY</span><strong>Failure recovery</strong><p>Measure whether the system regains progress after an observed execution failure.</p></div>
+          </div>
+          <div class="metric-panel" data-panel="efficiency" hidden>
+            <div class="metric-card"><span>MODEL</span><strong>Calls + tokens</strong><p>Report total calls, input and output tokens, and cached-input usage.</p></div>
+            <div class="metric-card"><span>LATENCY</span><strong>p50 / p95</strong><p>Track end-to-end reasoner decision and student-policy latency separately.</p></div>
+            <div class="metric-card"><span>CONTROL</span><strong>Correction ratio</strong><p>Measure the share of executed control steps that came from reasoner corrections.</p></div>
+            <div class="metric-card"><span>COMPUTE</span><strong>Wall time + GPU-hours</strong><p>Report compute and infrastructure failures separately from model outcomes.</p></div>
+          </div>
+          <div class="disclosure evaluation-note"><span>Required evidence</span>Every published result should include valid case coverage, code and checkpoint identity, native terminal receipts, paired seeds, model usage, latency, correction ratio, wall time, and infrastructure failures.</div>
+        </section>
+
+        <section class="section page-column" id="limitations">
+          <div class="section-kicker">06 · Interpretation and limits</div>
+          <h2>What we can test next</h2>
+          <p>The two panels contain only five cases per task. Their collection periods, provider sessions, infrastructure, and policy cadence differ. The 50-pair pooled counts are descriptive: nine hybrid-only successes, one policy-only success, and 40 ties. They should not be read as a single prospectively frozen trial.</p>
+          <div class="limitations-grid">
+            <article><h3>Packing</h3><p>Trace time after a verified grasp, transfer distance per correction, and the evidence that triggered each takeover.</p></article>
+            <article><h3>Classification</h3><p>Track credited objects and whether repeated corrections revisit the same state before timeout.</p></article>
+            <article><h3>Controlled follow-up</h3><p>Freeze the method identity and rerun exact cases on matched hardware, provider routes, and action cadence.</p></article>
+            <article><h3>Full accounting</h3><p>Report native outcome, paired score, correction ratio, calls, tokens, decision latency, and excluded attempts together.</p></article>
+          </div>
+          <p>The three-case <code>dev</code> validation is separate from these panels: two successes, one native timeout, and no concurrent policy baseline. Astra Direct has only one early off-panel build-tower case in the report and is not part of the paired tables.</p>
+        </section>
+
+        <section class="section page-column" id="roadmap">
+          <div class="section-kicker">07 · Roadmap</div>
+          <h2>From trustworthy baselines to a transferable control layer</h2>
+          <div class="roadmap">
+            <article class="complete"><span>M0</span><div><h3>Reproduction</h3><p>Freeze manifests and protocol boundaries for GPT-as-Policy and QwenPI_v3.</p></div></article>
+            <article class="complete"><span>M1</span><div><h3>Core</h3><p>Establish contracts, gates, traces, fake runtimes, and conformance tests.</p></div></article>
+            <article class="complete"><span>M2</span><div><h3>Native QwenPI_v3</h3><p>Establish native execution receipts and reconstruct historical paired baselines.</p></div></article>
+            <article class="current"><span>M3–M5</span><div><h3>Controlled quality and efficiency</h3><p>Study packing and classification trajectories, then freeze matched follow-up runs that report quality and cost together.</p></div></article>
+            <article><span>M6</span><div><h3>Generalization</h3><p>Add a non-VLA policy and a second environment without adding platform constants to the core package.</p></div></article>
+          </div>
+        </section>
+
+        <section class="closing page-column">
+          <p class="closing-kicker">The project succeeds when</p>
+          <h2>Every intervention has evidence, and every improvement survives paired evaluation.</h2>
+          <p>A new policy should require only a small adapter, while every result states its validity boundary, latency, and compute cost.</p>
+          <div class="closing-links">
+            <a href="https://github.com/JackAILab/starRoboHarness#readme" target="_blank" rel="noopener noreferrer">Read the README <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/JackAILab/starRoboHarness/blob/main/StarRoboHarness.md" target="_blank" rel="noopener noreferrer">Project vision <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/JackAILab/starRoboHarness/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">Architecture <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/JackAILab/starRoboHarness/blob/main/docs/evaluation.md" target="_blank" rel="noopener noreferrer">Evaluation protocol <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer><span>starRoboHarness · Research website</span><span>Two historical five-task paired panels · September 2026</span></footer>
+  </body>
+</html>

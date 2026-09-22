@@ -1,0 +1,288 @@
+{
+  "source_sha256": {
+    "original": "4e6870f5d090f510963525f154b7b6439f4da86b98d72426d533e04050a94e50",
+    "added": "b0116afcb7ab91399ebd4e7caad86be9a7d001b3806e7fb328181e0ccc0f5a16",
+    "efficiency": "5423960a9a4c1894e831d34afe43b3c5bb6b9e9ffb5872af694fa1cfcda2cf02",
+    "dev": "cd3e136ec374f79442c148e90b6ee6dde2f45188f6177b2bb5bbd6fc5b7e5890"
+  },
+  "blocks": {
+    "original": {
+      "tasks": [
+        {
+          "task": "organize_table",
+          "policy": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 10.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 65.0
+          }
+        },
+        {
+          "task": "classify_objects_by_language",
+          "policy": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 0.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 0.0
+          }
+        },
+        {
+          "task": "imitate_sorting_sequence",
+          "policy": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 1.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 1,
+            "sr_pct": 20.0,
+            "score": 36.0
+          }
+        },
+        {
+          "task": "arrange_largest_number",
+          "policy": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 2.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 1,
+            "sr_pct": 20.0,
+            "score": 37.0
+          }
+        },
+        {
+          "task": "fold_clothes",
+          "policy": {
+            "n": 5,
+            "successes": 1,
+            "sr_pct": 20.0,
+            "score": 32.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 4,
+            "sr_pct": 80.0,
+            "score": 80.0
+          }
+        }
+      ],
+      "overall": {
+        "policy": {
+          "n": 25,
+          "successes": 1,
+          "sr_pct": 4.0,
+          "score": 9.0
+        },
+        "hybrid": {
+          "n": 25,
+          "successes": 6,
+          "sr_pct": 24.0,
+          "score": 43.6
+        }
+      }
+    },
+    "added": {
+      "tasks": [
+        {
+          "task": "put_bottles_into_dustbin",
+          "policy": {
+            "n": 5,
+            "successes": 3,
+            "sr_pct": 60.0,
+            "score": 64.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 4,
+            "sr_pct": 80.0,
+            "score": 82.0
+          }
+        },
+        {
+          "task": "classify_objects",
+          "policy": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 6.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 22.0
+          }
+        },
+        {
+          "task": "build_tower",
+          "policy": {
+            "n": 5,
+            "successes": 4,
+            "sr_pct": 80.0,
+            "score": 82.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 4,
+            "sr_pct": 80.0,
+            "score": 86.0
+          }
+        },
+        {
+          "task": "make_kong",
+          "policy": {
+            "n": 5,
+            "successes": 1,
+            "sr_pct": 20.0,
+            "score": 20.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 3,
+            "sr_pct": 60.0,
+            "score": 60.0
+          }
+        },
+        {
+          "task": "pack_objects_into_box",
+          "policy": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 20.0
+          },
+          "hybrid": {
+            "n": 5,
+            "successes": 0,
+            "sr_pct": 0.0,
+            "score": 2.0
+          }
+        }
+      ],
+      "overall": {
+        "policy": {
+          "n": 25,
+          "successes": 8,
+          "sr_pct": 32.0,
+          "score": 38.4
+        },
+        "hybrid": {
+          "n": 25,
+          "successes": 11,
+          "sr_pct": 44.0,
+          "score": 50.4
+        }
+      }
+    }
+  },
+  "ten_hybrid": {
+    "n": 50,
+    "successes": 17,
+    "sr_pct": 34.0,
+    "score": 47.0
+  },
+  "efficiency_added": {
+    "baseline": {
+      "wall_seconds": {
+        "observed": 25,
+        "total": 8263.105800329242,
+        "mean": 330.5242320131697
+      },
+      "policy_calls": {
+        "observed": 25,
+        "total": 1360,
+        "mean": 54.4
+      },
+      "correction_steps": {
+        "observed": 25,
+        "total": 0,
+        "mean": 0.0
+      },
+      "input_tokens": {
+        "observed": 25,
+        "total": 0,
+        "mean": 0.0
+      },
+      "cached_input_tokens": {
+        "observed": 25,
+        "total": 0,
+        "mean": 0.0
+      },
+      "output_tokens": {
+        "observed": 25,
+        "total": 0,
+        "mean": 0.0
+      }
+    },
+    "hybrid": {
+      "wall_seconds": {
+        "observed": 25,
+        "total": 124995.6334114084,
+        "mean": 4999.825336456336
+      },
+      "policy_calls": {
+        "observed": 25,
+        "total": 2139,
+        "mean": 85.56
+      },
+      "correction_steps": {
+        "observed": 25,
+        "total": 4627,
+        "mean": 185.08
+      },
+      "input_tokens": {
+        "observed": 25,
+        "total": 462535681,
+        "mean": 18501427.24
+      },
+      "cached_input_tokens": {
+        "observed": 25,
+        "total": 434569856,
+        "mean": 17382794.24
+      },
+      "output_tokens": {
+        "observed": 25,
+        "total": 1563270,
+        "mean": 62530.8
+      }
+    }
+  },
+  "dev": [
+    {
+      "task": "classify_objects_by_language",
+      "success": false,
+      "score": 10.0,
+      "termination": "native_timeout"
+    },
+    {
+      "task": "arrange_largest_number",
+      "success": true,
+      "score": 100.0,
+      "termination": "native_success"
+    },
+    {
+      "task": "make_kong",
+      "success": true,
+      "score": 100.0,
+      "termination": "native_success"
+    }
+  ]
+}

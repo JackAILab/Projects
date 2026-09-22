@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="starRoboHarness：可审计的机器人执行框架，两组 RoboDojo 精确配对评测、方法、成本与局限。" />
+  <meta name="theme-color" content="#fbf8f1" />
+  <title>starRoboHarness · 中文技术报告</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <script src="../assets/evaluation/manifest.js" defer></script>
+  <script src="../app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="starRoboHarness 首页"><span class="wordmark-mark"><img src="../assets/logo.png" alt="" /></span><span>starRoboHarness</span></a>
+    <nav class="topbar-nav" aria-label="页首导航"><a href="#abstract">摘要</a><a href="#introduction">引言</a><a href="#method">方法</a><a href="#results">结果</a><a href="../assets/tech-report.pdf">技术报告</a><a class="language-link" href="../">English</a><a class="repo-link" href="https://github.com/JackAILab/starRoboHarness" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">菜单</button>
+  </header>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="移动端导航" hidden><a href="#abstract">摘要</a><a href="#method">方法</a><a href="#results">结果</a><a href="#replays">视频回放</a><a href="../">English</a></nav>
+  <aside class="reader-rail" aria-label="阅读进度">
+    <div class="rail-top"><span class="rail-label">阅读进度</span><span id="reading-percent">0%</span></div>
+    <div class="rail-track"><i id="reading-progress"></i></div>
+    <div class="rail-session-card"><span class="rail-card-kicker">当前章节</span><strong id="rail-session">摘要</strong><span id="rail-detail">01 / 09 节</span></div>
+    <button class="rail-toggle" aria-expanded="true" aria-controls="reader-sections">目录 <span aria-hidden="true">⌄</span></button>
+    <nav id="reader-sections" aria-label="正文目录"><a href="#abstract">摘要</a><a href="#introduction">引言</a><a href="#method">方法</a><a href="#architecture">系统架构</a><a href="#results">实验结果</a><a href="#replays">视频回放</a><a href="#evaluation">评测协议</a><a href="#limitations">局限与后续</a><a href="#roadmap">路线图</a></nav>
+  </aside>
+  <main id="main"><article class="report" id="top">
+    <header class="hero">
+          <div class="hero-background" aria-hidden="true">
+            <div class="hero-strip">
+              <div class="hero-strip-track">
+                <div class="hero-strip-set">
+                  <img src="../assets/hero/arrange-l0-early.png" alt="" />
+                  <img src="../assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="../assets/hero/arrange-l1-mid.png" alt="" />
+                  <img src="../assets/hero/classify-l1-final.png" alt="" />
+                  <img src="../assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="../assets/hero/classify-l1-mid.png" alt="" />
+                </div>
+                <div class="hero-strip-set">
+                  <img src="../assets/hero/arrange-l0-early.png" alt="" />
+                  <img src="../assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="../assets/hero/arrange-l1-mid.png" alt="" />
+                  <img src="../assets/hero/classify-l1-final.png" alt="" />
+                  <img src="../assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="../assets/hero/classify-l1-mid.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="hero-strip">
+              <div class="hero-strip-track">
+                <div class="hero-strip-set">
+                  <img src="../assets/hero/sorting-mid.png" alt="" />
+                  <img src="../assets/hero/organize-l0-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-left-wrist.png" alt="" />
+                  <img src="../assets/hero/organize-l1-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-final.png" alt="" />
+                  <img src="../assets/hero/organize-l0-final.png" alt="" />
+                </div>
+                <div class="hero-strip-set">
+                  <img src="../assets/hero/sorting-mid.png" alt="" />
+                  <img src="../assets/hero/organize-l0-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-left-wrist.png" alt="" />
+                  <img src="../assets/hero/organize-l1-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-final.png" alt="" />
+                  <img src="../assets/hero/organize-l0-final.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="hero-strip">
+              <div class="hero-strip-track">
+                <div class="hero-strip-set">
+                  <img src="../assets/hero/classify-l1-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-final.png" alt="" />
+                  <img src="../assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="../assets/hero/organize-l0-final.png" alt="" />
+                  <img src="../assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-mid.png" alt="" />
+                </div>
+                <div class="hero-strip-set">
+                  <img src="../assets/hero/classify-l1-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-final.png" alt="" />
+                  <img src="../assets/hero/arrange-l2-mid.png" alt="" />
+                  <img src="../assets/hero/organize-l0-final.png" alt="" />
+                  <img src="../assets/hero/classify-l0-mid.png" alt="" />
+                  <img src="../assets/hero/sorting-mid.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      <div class="hero-content page-column">
+        <h1><span>starRoboHarness</span></h1>
+        <div class="authors" aria-label="作者"><span class="author-line"><span>Jiehui Huang</span><span>Haowen Yan</span><span>Yuxin Chen</span><span>Zixuan Wang</span><span>Senqiao Yang</span></span><span class="author-line"><span>Pengguang Chen</span><span>Jinhui Ye</span><span>Shu Liu</span><span>Jiaya Jia</span></span></div>
+        <p class="dek">面向推理驱动机器人的开放执行框架</p><span class="status-pill"><i></i>持续开发中</span>
+        <div class="hero-actions"><a class="button primary" href="#results">查看配对结果</a><a class="button secondary" href="../assets/tech-report.pdf">下载技术报告</a><a class="button secondary" href="../">English</a></div>
+      </div>
+    </header>
+    <nav class="section-nav page-column" aria-label="报告章节"><a href="#abstract">摘要</a><a href="#introduction">引言</a><a href="#method">方法</a><a href="#architecture">架构</a><a href="#results">结果</a><a href="#evaluation">评测</a><a href="#limitations">局限</a><a href="#roadmap">路线图</a></nav>
+    <div class="quick-links page-column"><a href="#results">配对结果与图表</a><a href="#replays">历史回放</a><a href="../assets/tech-report.pdf">下载英文技术报告 ↗</a></div>
+
+    <section class="section page-column" id="abstract">
+      <div class="section-kicker">01 · 摘要</div><h2>在推理决策与机器人动作之间建立可审计的边界</h2>
+      <p class="lead">starRoboHarness 将策略提案绑定到精确观测，在执行前审查推理器决策，并记录实际动作确认和环境原生终止结果。策略、推理器与环境通过适配器接入。</p>
+      <p>我们整理了两组历史 RoboDojo 面板，每组有 5 个任务、每任务 5 个纯策略与混合方法的精确配对案例。第一组混合方法成功 <strong>6/25</strong>，纯策略成功 <strong>1/25</strong>；第二组分别为 <strong>11/25</strong> 和 <strong>8/25</strong>。任务间差异明显：打包任务的部分得分下降，而推理消耗很高。历史方法的执行节奏不同，因此这些结果不能单独证明纠正动作的因果收益。</p>
+      <p class="keywords"><b>关键词：</b>机器人策略 · 多模态推理 · 混合控制 · 原生评测 · 执行轨迹</p>
+    </section>
+
+    <figure class="system-architecture-figure wide-inner"><img src="../assets/framework.png" alt="starRoboHarness 框架图，展示任务与环境输入、控制模式、执行接口和评测审计；虚线模块为持续研究方向。" /><figcaption>技术报告中的项目框架图。本文结果基于 QwenPI_v3、GPT-6 Astra 与 RoboDojo 集成；虚线模块仍在研究中。<a href="../assets/framework.pdf">打开高清 PDF ↗</a></figcaption></figure>
+
+    <section class="section page-column" id="introduction">
+      <div class="section-kicker">02 · 引言</div><h2>让推理在需要判断的时候介入</h2>
+      <p class="lead">机器人策略能够快速生成连续动作；多模态推理器能够检查可见失败、判断下一段动作是否符合任务目标，并规划短程恢复。结合两者时，关键是明确何时授权推理器，以及如何核验授权后的真实执行结果。</p>
+      <p>在 starRoboHarness 中，学习得到的策略是默认控制器。推理器只读取公开的任务、图像、机器人状态和追踪证据；接管必须通过证据与安全门。原有任务指令和原生终止判定保持在环境端，策略、推理器与仿真平台可以通过适配器独立替换。</p>
+      <div class="principles-grid"><article><span>01</span><h3>协议稳定</h3><p>提案、决策、执行和结果使用明确契约，各模型和平台通过适配器连接。</p></article><article><span>02</span><h3>证据门控</h3><p>单纯的不确定性不能触发接管；修正应对应可观察的失败或意图偏离。</p></article><article><span>03</span><h3>控制有界</h3><p>混合方法的学生动作前缀最多 15 步，局部纠正最多 5 步，然后重新观测。</p></article><article><span>04</span><h3>留下凭据</h3><p>记录提案、决策、动作确认、环境原生结果、版本和资源使用。</p></article></div>
+    </section>
+
+    <section class="section page-column" id="method">
+      <div class="section-kicker">03 · 方法</div><h2>策略生成动作，推理器选择性审查</h2>
+      <p>每次控制循环从原始任务指令和精确观测开始。QwenPI_v3 提交动作段；推理器分别检查上一段真实执行情况与下一段可见动作意图。证据门决定沿用策略提案，或执行受限的末端执行器修正。安全验证与环境执行由明确的控制边界负责。</p>
+      <div class="protocol" aria-label="控制流程"><div class="protocol-node input-node"><span>输入</span><strong>任务与观测</strong><small>3 路 RGB · 14 维状态 · 指令</small></div><div class="protocol-arrow" aria-hidden="true">↓</div><div class="protocol-node"><span>策略</span><strong>QwenPI_v3 提案</strong><small>50 × 14 动作序列</small></div><div class="protocol-arrow" aria-hidden="true">↓</div><div class="protocol-node accent-node"><span>审查</span><strong>证据门与安全验证</strong><small>执行结果 · 意图 · 新鲜度 · 边界</small></div><div class="protocol-branch" aria-hidden="true"><i></i><b>二选一</b><i></i></div><div class="protocol-outcomes"><div class="protocol-node"><span>通过</span><strong>执行策略前缀</strong><small>1–15 步</small></div><div class="protocol-node teal-node"><span>纠正</span><strong>局部末端修正</strong><small>1–5 步</small></div></div><div class="protocol-return">↺ 回到新的观测边界</div></div>
+      <div class="spec-row"><div><strong>≤ 15</strong><span>策略执行步</span></div><div><strong>≤ 5</strong><span>纠正步</span></div><div><strong>5 cm</strong><span>每臂平移上限</span></div><div><strong>0.35 rad</strong><span>每臂旋转上限</span></div></div>
+      <p>QwenPI_v3 使用三路有序 RGB 图像、双臂 14 维关节状态，并预测 50 × 14 的绝对关节动作；服务端采用固定的 <code>arx_x5</code> 归一化。纯策略基线每次重规划执行 16 步，历史混合方法执行至多 15 步学生前缀或至多 5 步局部纠正。这一节奏差异也是结果比较的一部分。</p>
+    </section>
+
+    <section class="wide-section architecture-section" id="architecture"><div class="wide-inner">
+      <div class="section-kicker">03.2 · 系统架构</div><div class="section-heading-row"><h2>通过适配器连接外部系统</h2><p>策略服务、推理服务和 RoboDojo 等环境实现均位于轻量核心包之外。</p></div>
+      <div class="architecture-map"><div class="arch-lane"><span>提案</span><strong>PolicyAdapter</strong><small>把动作提案与精确观测和动作契约绑定。</small></div><div class="arch-connector"><span>提案</span></div><div class="arch-lane focus"><span>权限</span><strong>Evidence Gate + SafetyGuard</strong><small>检查请求身份、新鲜度、证据、几何单位和动作边界。</small></div><div class="arch-connector"><span>决策</span></div><div class="arch-lane"><span>执行</span><strong>EnvironmentAdapter</strong><small>唯一改变环境状态的组件，返回实际确认和原生终止结果。</small></div></div>
+      <div class="adapter-strip"><span>观测与上下文</span><span>推理器适配器</span><span>环境适配器</span><span>追加式执行追踪</span></div>
+    </div></section>
+
+    <section class="section wide-inner results-section" id="results">
+      <div class="results-intro"><div class="section-kicker">04 · 2026 年 9 月历史配对结果</div><h2>两组五任务面板，50 个精确配对案例</h2><p class="lead">每组比较纯 QwenPI_v3 策略与 GPT-6 Astra 审查 QwenPI_v3 提案的混合方法。两组数据采集于不同阶段，因而分别报告。成功和得分均来自仿真环境的原生终止凭据。</p></div>
+      <div class="result-summary"><article><span>第一组成功数</span><strong>6/25</strong><p>混合方法 · 纯策略 1/25</p></article><article><span>第二组成功数</span><strong>11/25</strong><p>混合方法 · 纯策略 8/25</p></article><article><span>第一组平均得分</span><strong>43.6</strong><p>混合方法 · 纯策略 9.0</p></article><article><span>第二组平均得分</span><strong>50.4</strong><p>混合方法 · 纯策略 38.4</p></article></div>
+      <div class="disclosure"><span>如何阅读这些结果</span>同一任务内按变体、布局、随机种子和案例身份做精确配对。纯策略与混合方法的执行节奏不同；两个历史面板的采集时期和基础设施也不同。观察到的差异不能解释为单独由推理纠正产生的因果效果。</div>
+      <figure class="report-figure"><img src="../assets/task-score-comparison.svg" alt="十个任务的纯策略与混合方法原生平均得分对比；八项上升，一项持平，打包下降。" loading="lazy" /><figcaption>任务平均原生得分与成功次数。图中的竖线区分两组历史面板。<a href="../assets/task-score-comparison.svg">打开矢量图 ↗</a></figcaption></figure>
+      <div class="result-table-heading"><div><span>表 1</span><h3>原始五任务面板</h3></div><p>每任务 5 个精确配对案例；得分为 0–100 的原生平均分。</p></div>
+    <div class="benchmark-table-wrap" tabindex="0" aria-label="原始五任务面板结果表"><table class="benchmark-table paired-table">
+      <caption>原始五任务面板：纯策略与混合方法的原生成功数和平均得分</caption>
+      <thead><tr><th scope="col">任务</th><th scope="col">纯策略成功</th><th scope="col" class="primary-result">混合方法成功</th><th scope="col">纯策略得分</th><th scope="col" class="primary-result">混合方法得分</th></tr></thead>
+      <tbody><tr><th scope="row">整理桌面</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>10</td><td class="primary-result"><strong>65</strong></td></tr><tr><th scope="row">按语言分类</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>0</td><td class="primary-result"><strong>0</strong></td></tr><tr><th scope="row">模仿排序序列</th><td>0/5</td><td class="primary-result"><strong>1/5</strong></td><td>1</td><td class="primary-result"><strong>36</strong></td></tr><tr><th scope="row">排列最大数字</th><td>0/5</td><td class="primary-result"><strong>1/5</strong></td><td>2</td><td class="primary-result"><strong>37</strong></td></tr><tr><th scope="row">叠衣服</th><td>1/5</td><td class="primary-result"><strong>4/5</strong></td><td>32</td><td class="primary-result"><strong>80</strong></td></tr><tr class="overall-row"><th scope="row">本组汇总</th><td>1/25</td><td class="primary-result"><strong>6/25</strong></td><td>9</td><td class="primary-result"><strong>43.6</strong></td></tr></tbody>
+    </table></div>
+      <div class="result-table-heading"><div><span>表 2</span><h3>新增五任务面板</h3></div><p>每任务 5 个精确配对案例；得分为 0–100 的原生平均分。</p></div>
+    <div class="benchmark-table-wrap" tabindex="0" aria-label="新增五任务面板结果表"><table class="benchmark-table paired-table">
+      <caption>新增五任务面板：纯策略与混合方法的原生成功数和平均得分</caption>
+      <thead><tr><th scope="col">任务</th><th scope="col">纯策略成功</th><th scope="col" class="primary-result">混合方法成功</th><th scope="col">纯策略得分</th><th scope="col" class="primary-result">混合方法得分</th></tr></thead>
+      <tbody><tr><th scope="row">把瓶子放入箱中</th><td>3/5</td><td class="primary-result"><strong>4/5</strong></td><td>64</td><td class="primary-result"><strong>82</strong></td></tr><tr><th scope="row">物体分类</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>6</td><td class="primary-result"><strong>22</strong></td></tr><tr><th scope="row">搭建塔楼</th><td>4/5</td><td class="primary-result"><strong>4/5</strong></td><td>82</td><td class="primary-result"><strong>86</strong></td></tr><tr><th scope="row">拼成「孔」字</th><td>1/5</td><td class="primary-result"><strong>3/5</strong></td><td>20</td><td class="primary-result"><strong>60</strong></td></tr><tr><th scope="row">把物体装入盒中</th><td>0/5</td><td class="primary-result"><strong>0/5</strong></td><td>20</td><td class="primary-result"><strong>2</strong></td></tr><tr class="overall-row"><th scope="row">本组汇总</th><td>8/25</td><td class="primary-result"><strong>11/25</strong></td><td>38.4</td><td class="primary-result"><strong>50.4</strong></td></tr></tbody>
+    </table></div>
+      <p class="results-note">有原生终止凭据的超时仍计为有效失败。供应商或基础设施故障另记在尝试台账中。新增纯策略收集期间 18 次控制前故障不进入任一方法的分母。<a href="../assets/case-records.csv">下载脱敏案例数据</a> · <a href="../assets/results-summary.json">下载汇总数据</a>。</p>
+      <div class="result-table-heading"><div><span>逐任务观察</span><h3>完成率、部分分与纠正次数需要一起看</h3></div></div>
+      <div class="insight-grid"><article><span>01 · 完成任务</span><h4>叠衣服与 Make Kong 推动成功数增长</h4><p>原始面板叠衣服从 1/5 升至 4/5；新增面板 Make Kong 从 1/5 升至 3/5。</p></article><article><span>02 · 部分得分</span><h4>得分增加不等于任务完成</h4><p>新增面板物体分类平均得分从 6 升至 22，但两种方法都没有完成任何案例。</p></article><article><span>03 · 退步案例</span><h4>打包需要进一步分析轨迹</h4><p>两种方法均为 0/5 成功，混合方法平均部分得分从 20 降至 2；五个混合案例都达到原生 1,300 步上限。</p></article><article><span>04 · 归因边界</span><h4>成功运行也可能没有纠正动作</h4><p>早期搭塔成功案例与后来两次成功开发案例均记录零纠正步。因此必须分别评估推理器放行和接管的作用。</p></article></div>
+      <div class="cost-panel"><div><span>新增 25 案例面板 · 推理消耗</span><h3>质量和成本应在同一张账本上</h3><p>混合方法累计 4,627 个纠正步，报告了 4.625 亿输入 token 和 156 万输出 token；约 93.95% 的输入 token 记为缓存。这些数值是异步使用量快照，不是最终账单。</p></div><div class="cost-numbers"><strong>4,627<small>纠正步</small></strong><strong>462.5M<small>报告的输入 token</small></strong></div></div>
+      <p class="results-note">新增面板的平均控制循环用时分别为纯策略 330.5 秒和混合方法 4,999.8 秒。历史机器、传输方式与采集时期不同，不能据此得出受控的速度倍率。两组合并的混合方法描述性指标为 17/50 成功、平均得分 47.0。</p>
+      <section id="replays" class="evaluation-replays" aria-labelledby="replay-heading"><div class="replay-heading"><div><span class="section-kicker">历史五任务视频</span><h3 id="replay-heading">选定案例回放</h3></div><span class="replay-source">早期版本素材，与上面的配对表分开</span></div><p class="replay-intro">这些视频来自早期五任务网页版本，用于展示执行过程，不是上面 50 对案例的逐例证据。可以在各任务中切换纯策略和混合方法的回放。</p><div id="replay-list" class="replay-list" aria-live="polite"></div><noscript><p class="replay-notice">请启用 JavaScript 以选择控制模式和播放视频。</p></noscript></section>
+    </section>
+
+    <section class="section page-column" id="evaluation"><div class="section-kicker">05 · 评测协议</div><h2>同时报告质量、有效性与计算成本</h2><p class="lead">有效比较要对齐任务、布局、随机种子、指令、动作契约和原生终止判定。成功不能由模型自报代替。</p>
+      <div class="metric-switch" role="group" aria-label="评测指标类别"><button type="button" aria-pressed="true" data-metric="quality">质量指标</button><button type="button" aria-pressed="false" data-metric="efficiency">效率指标</button></div>
+      <div class="metric-panel" data-panel="quality"><div class="metric-card"><span>主要指标</span><strong>原生成功与得分</strong><p>使用环境终止凭据，而非模型自报。</p></div><div class="metric-card"><span>配对比较</span><strong>胜／平／负</strong><p>逐案例对齐任务、布局、种子与终止。</p></div><div class="metric-card"><span>安全性</span><strong>无证据接管</strong><p>记录缺乏失败或意图偏离证据的干预。</p></div><div class="metric-card"><span>恢复能力</span><strong>失败后进展</strong><p>检查观察到失败后是否恢复任务进度。</p></div></div>
+      <div class="metric-panel" data-panel="efficiency" hidden><div class="metric-card"><span>模型</span><strong>调用与 token</strong><p>报告总调用、输入输出和缓存使用。</p></div><div class="metric-card"><span>时延</span><strong>p50／p95</strong><p>分别记录推理器决策和学生策略端到端时延。</p></div><div class="metric-card"><span>控制</span><strong>纠正占比</strong><p>实际动作中推理器纠正步所占比例。</p></div><div class="metric-card"><span>计算资源</span><strong>用时与 GPU 小时</strong><p>把资源和基础设施故障与机器人失败分开。</p></div></div>
+      <div class="disclosure evaluation-note"><span>结果应附带的凭据</span>有效案例覆盖、代码与权重身份、原生终止凭据、配对种子、模型用量、时延、纠正比例、总用时，以及被排除的基础设施尝试。</div>
+    </section>
+
+    <section class="section page-column" id="limitations"><div class="section-kicker">06 · 局限与后续</div><h2>下一步应检验什么</h2><p>每任务只有五个配对案例。不同历史阶段的机器、供应商会话、恢复尝试和执行节奏并未全部固定。两组的 50 对数据合并后有 9 个仅混合方法成功、1 个仅纯策略成功、40 个持平；这是描述性计数，不是一项预先冻结的统一试验。</p>
+      <div class="limitations-grid"><article><h3>打包</h3><p>追踪抓取确认后的耗时、每次纠正的转移距离，以及接管是否对应真实失败。</p></article><article><h3>分类</h3><p>记录超时前哪些物体获得部分得分，重复纠正是否回到同一状态。</p></article><article><h3>受控重测</h3><p>冻结方法身份，在一致的案例、硬件、模型服务路由和动作节奏下重新运行。</p></article><article><h3>完整成本</h3><p>同时报告成功、部分得分、纠正比例、调用、token、时延和排除的尝试。</p></article></div>
+      <p>另外，三个案例的 <code>dev</code> 验证是独立开发结果：两次成功、一次原生超时，没有同时收集的纯策略对照。Astra Direct 仅有报告中的一个早期、面板外搭塔案例，不属于上面的配对表。</p>
+    </section>
+
+    <section class="section page-column" id="roadmap"><div class="section-kicker">07 · 路线图</div><h2>从可信评测走向可迁移的执行层</h2><div class="roadmap"><article class="complete"><span>M0</span><div><h3>复现</h3><p>冻结方法清单与协议边界。</p></div></article><article class="complete"><span>M1</span><div><h3>核心</h3><p>建立契约、证据门、安全验证、追踪和一致性测试。</p></div></article><article class="complete"><span>M2</span><div><h3>原生 QwenPI_v3</h3><p>建立原生终止凭据，整理历史精确配对基线。</p></div></article><article class="current"><span>M3–M5</span><div><h3>质量与效率的受控评测</h3><p>分析打包和分类轨迹，冻结资源对齐的后续试验，同时报告质量与成本。</p></div></article><article><span>M6</span><div><h3>泛化</h3><p>接入非 VLA 策略与第二个环境，保持核心包与平台实现解耦。</p></div></article></div></section>
+    <section class="closing page-column"><p class="closing-kicker">项目目标</p><h2>让每次干预都有证据，让每个提升都经得起配对评测。</h2><p>新策略只需接入适配器；每个结果都说明有效性边界、时延与计算成本。</p><div class="closing-links"><a href="https://github.com/JackAILab/starRoboHarness" target="_blank" rel="noopener noreferrer">GitHub 仓库 ↗</a><a href="../assets/tech-report.pdf">技术报告 ↗</a><a href="../assets/framework.pdf">框架图 ↗</a></div></section>
+  </article></main>
+  <footer><span>starRoboHarness · 中文项目网页</span><span>两组历史五任务配对面板 · 2026 年 9 月</span></footer>
+</body></html>
